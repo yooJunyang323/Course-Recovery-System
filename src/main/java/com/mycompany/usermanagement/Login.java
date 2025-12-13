@@ -192,7 +192,7 @@ public class Login extends javax.swing.JFrame {
             SessionManager.setLoggedUser(user);
         
             Menu menu = new Menu();
-            menu.setVisible(true);
+            //menu.setVisible(true);
             this.dispose();
         
         }else if(btnText.equals("Send OTP")){

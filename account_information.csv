@@ -1,5 +1,5 @@
 StudentID,FirstName,LastName,Email,Password,Role,isActive,lastLogin,Major,Year
-S000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,2025-12-11 12:25:35
+S000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,2025-12-13 21:34:58
 O000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,--
 A000,Gaku,Kobayakawa,kobayakawa401@gmail.com,000,Admin,true,2025-12-13 15:49:46
 S002,kljaghbriu,bkajbrfoa,S002@university.edu,S002@0987654321,Admin,true,--

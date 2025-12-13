@@ -5,11 +5,8 @@
 package com.mycompany.usermanagement;
 
 import javax.swing.JOptionPane;
+import com.mycompany.course_recovery_plan.CourseRecovery;
 
-/**
- *
- * @author gk005
- */
 public class Menu extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Menu.class.getName());
@@ -34,7 +31,9 @@ public class Menu extends javax.swing.JFrame {
             btnCreateUser.setVisible(true);
             btnUserUpdate.setVisible(true);
         }else if (userRole.equals("Officer")){
-            
+            CourseRecovery cr = new CourseRecovery();
+            cr.setVisible(true);
+            this.dispose();
         }
         
     }
