@@ -412,6 +412,11 @@ public class CourseRecovery extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("User management");
         jLabel6.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel6MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1120,6 +1125,10 @@ public class CourseRecovery extends javax.swing.JFrame {
         AcademicPerformanceReporting popUpWindow = new AcademicPerformanceReporting();
         popUpWindow.setVisible(true);
     }//GEN-LAST:event_jLabel9MouseClicked
+
+    private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
+        
+    }//GEN-LAST:event_jLabel6MouseClicked
 
 
     public static void main(String args[]) {
