@@ -1,11 +1,13 @@
+package com.mycompany.course_recovery_plan;
+
 import java.util.*;
 import javax.swing.table.DefaultTableModel;
 
 public class IneligibleStudentsTable extends javax.swing.JFrame {
 
-    String studentFile = "C:\\Users\\aidan\\OneDrive\\Documents\\NetBeansProjects\\Assignment2\\src\\main\\java\\student_information.csv";
-    String studentAssessmentFile = "C:\\Users\\aidan\\OneDrive\\Documents\\NetBeansProjects\\Assignment2\\src\\main\\java\\student_assessment_information_1.csv";
-    String courseFile = "C:\\Users\\aidan\\OneDrive\\Documents\\NetBeansProjects\\Assignment2\\src\\main\\java\\course_assessment_information.csv";
+    String studentFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_information.csv";
+    String studentAssessmentFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_assessment_information.csv";
+    String courseFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\course_assessment_information.csv";
     List<Object[]> fullStudentList = new ArrayList<>();
     StudentDataManager dataManager;
     

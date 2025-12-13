@@ -1,46 +1,39 @@
-IneligibleStudentsTable$2.class
 com\mycompany\course_recovery_plan\Course_Recovery_Plan.class
-IneligibleStudentsTable.class
 com\mycompany\course_recovery_plan\CourseRecovery$7.class
 com\mycompany\course_recovery_plan\createPlan$1.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$2.class
 com\mycompany\course_recovery_plan\AcademicPerformanceReporting$2.class
 com\mycompany\course_recovery_plan\Login.class
 com\mycompany\course_recovery_plan\Student_Information.class
 com\mycompany\course_recovery_plan\CourseRecovery$9.class
-<<<<<<< HEAD
-=======
-Course_Information.class
-IneligibleStudentsTable$4.class
->>>>>>> origin/aidan
 com\mycompany\course_recovery_plan\CourseRecovery$4.class
 com\mycompany\course_recovery_plan\AcademicPerformanceReporting.class
 com\mycompany\course_recovery_plan\createPlan.class
-IneligibleStudentsTable$5.class
 com\mycompany\course_recovery_plan\createPlan$3.class
 com\mycompany\course_recovery_plan\Recovery_plan.class
 com\mycompany\course_recovery_plan\EmailService.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$4.class
 com\mycompany\course_recovery_plan\EmailService$1.class
 com\mycompany\course_recovery_plan\CourseRecovery$5.class
 com\mycompany\course_recovery_plan\CourseRecovery.class
 com\mycompany\course_recovery_plan\Failed_student.class
+com\mycompany\course_recovery_plan\StudentDataManager.class
 com\mycompany\course_recovery_plan\CourseRecovery$2.class
+com\mycompany\course_recovery_plan\StudentDetailsFrame$1.class
 com\mycompany\course_recovery_plan\ReportItem.class
 com\mycompany\course_recovery_plan\CourseRecovery$8.class
 com\mycompany\course_recovery_plan\AcademicPerformanceReporting$1.class
 com\mycompany\course_recovery_plan\CourseRecovery$1.class
+com\mycompany\course_recovery_plan\StudentDetailsFrame.class
 com\mycompany\course_recovery_plan\CourseRecovery$3.class
 com\mycompany\course_recovery_plan\createPlan$2.class
-StudentDataManager.class
-StudentDetailsFrame$1.class
-IneligibleStudentsTable$3.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$6.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$1.class
 com\mycompany\course_recovery_plan\Login$1.class
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$5.class
 com\mycompany\course_recovery_plan\AcademicPerformanceReporting$3.class
 com\mycompany\course_recovery_plan\CourseRecovery$6.class
 com\mycompany\course_recovery_plan\createPlan$4.class
-<<<<<<< HEAD
 com\mycompany\course_recovery_plan\Course_Information.class
-=======
-IneligibleStudentsTable$1.class
-IneligibleStudentsTable$6.class
-StudentDetailsFrame.class
->>>>>>> origin/aidan
+com\mycompany\course_recovery_plan\IneligibleStudentsTable$3.class
