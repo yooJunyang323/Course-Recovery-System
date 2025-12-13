@@ -1,41 +1,49 @@
-
-import com.mycompany.course_recovery_plan.Recovery_plan;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+package com.mycompany.course_recovery_plan;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
-public class Course_Information {
-    private static final String CSV_FILE_PATH = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\course_information.csv"; 
+
+public class Student_Information {
+    private static final String CSV_FILE_PATH = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_information.csv"; 
     private static final String DELIMITER = ",";
     
-    public static List<Course_Information> courseInfo = new ArrayList<>();
-    public String courseCode;
-    public String tittle;
+    public String id;
+    public String name;
     public String major;
-    public int semester;
-    public int credit;
+    public String year;
+    public String email;
+    
+    
+    public Student_Information() {
+        //
+    }
 
-    public Course_Information(String courseCode, String tittle, String major, int semester, int credit) {
-        this.courseCode = courseCode;
-        this.tittle = tittle;
+    public Student_Information(String id, String FirstName, String LastName, String major, String year, String email) {
+        this.id = id;
+        this.name = FirstName + LastName;
         this.major = major;
-        this.semester = semester;
-        this.credit = credit;
+        this.year = year;
+        this.email = email;
     }
     
     
     
+    public static List<Student_Information> info = new ArrayList<>();
+    
     public static void readCsvData(){
-        courseInfo.clear();
+        info.clear();
         String line;
         int lineNumber = 0;
         
@@ -58,17 +66,18 @@ public class Course_Information {
                 
                 if (values.length >= 4) {
                     try {
-                        Course_Information ci = new Course_Information(
-                            values[0].trim(), // courseCode
-                            values[1].trim(), // tittle
-                            values[2].trim(), // major
-                            Integer.parseInt(values[3].trim()), // semester
-                            Integer.parseInt(values[4].trim()) //credit hours
+                        Student_Information info1 = new Student_Information(
+                            values[0].trim(), // ID
+                            values[1].trim(), // First Name
+                            values[2].trim(), // Last Name
+                            values[3].trim(), // major
+                            values[4].trim(), // year
+                            values[5].trim() //email
                     );
                     
                     // Add object into list
-                    courseInfo.add(ci);
-                    System.out.println("readCsvData: " + ci);
+                    info.add(info1);
+                    System.out.println("readCsvData: " + info);
                     
                     } catch (NumberFormatException e) {
                         System.err.println("Data Error on line " + lineNumber + ": Failed to parse number or boolean.");
@@ -83,5 +92,14 @@ public class Course_Information {
         }
         
     }
+    
+    
+    public static void main(String[] args) {
+        readCsvData();
+        System.out.println("Total loaded: " + info.size());
+    }
+    
+    
+    
     
 }
