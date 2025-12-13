@@ -421,7 +421,7 @@ public class CreateNewUser extends javax.swing.JFrame {
         
         String prefix = role.substring(0,1).toUpperCase();
         
-        UserDateGenerator generator = new UserDateGenerator("student_information.csv");
+        UserDateGenerator generator = new UserDateGenerator("account_information.csv");
         
         userID = generator.generateuserID(role);
         email = generator.generateEmail(userID);
@@ -476,7 +476,7 @@ public class CreateNewUser extends javax.swing.JFrame {
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         // TODO add your handling code here:
-        UserFileWriter writer = new UserFileWriter("student_information.csv");
+        UserFileWriter writer = new UserFileWriter("account_information.csv");
         User newUser = null;
         
         if (role.equals("Student")) {

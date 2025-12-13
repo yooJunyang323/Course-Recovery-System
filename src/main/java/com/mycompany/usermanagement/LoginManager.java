@@ -36,7 +36,7 @@ public class LoginManager {
         
         user.setLastLogin(timeStamp);
         
-        UserFileWriter writer = new UserFileWriter("student_information.csv");
+        UserFileWriter writer = new UserFileWriter("account_information.csv");
         writer.updateUserByID(user.getUserID(), user);
     }
 

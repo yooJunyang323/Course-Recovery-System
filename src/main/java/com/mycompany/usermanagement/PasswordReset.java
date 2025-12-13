@@ -230,7 +230,7 @@ public class PasswordReset extends javax.swing.JFrame {
                 String oldPass = logged.getPassword();
                 logged.setPassword(pass1);
                 
-                UserFileWriter writer = new UserFileWriter("student_information.csv");
+                UserFileWriter writer = new UserFileWriter("account_information.csv");
                 
                 boolean result = writer.updateUserByID(logged.getUserID(),logged);
                 

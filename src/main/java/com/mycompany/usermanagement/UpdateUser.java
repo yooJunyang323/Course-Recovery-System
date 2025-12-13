@@ -75,7 +75,7 @@ public class UpdateUser extends javax.swing.JFrame {
     }
     
     public void loadInitialTable(){
-        UserFileReader reader = new UserFileReader("student_information.csv");
+        UserFileReader reader = new UserFileReader("account_information.csv");
         List<User> allUsers = reader.getAllUsers();
         
         filterManager = new FilterManager(allUsers);
@@ -789,7 +789,7 @@ public class UpdateUser extends javax.swing.JFrame {
             );
             
             if (result == JOptionPane.OK_OPTION) {
-                UserFileWriter writer = new UserFileWriter("student_information.csv");
+                UserFileWriter writer = new UserFileWriter("account_information.csv");
                 boolean success = writer.updateUserByID(editingUser.getUserID(), editingUser);
                 if (success) {
                     JOptionPane.showMessageDialog(this, "User data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);

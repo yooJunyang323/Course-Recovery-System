@@ -177,7 +177,7 @@ public class Login extends javax.swing.JFrame {
                 return;
             }
             
-            UserFileReader reader = new UserFileReader("student_information.csv");
+            UserFileReader reader = new UserFileReader("account_information.csv");
             LoginManager logiManager = new LoginManager(reader);
             
             User user = logiManager.login(enteredID, enteredPassword);
@@ -198,7 +198,7 @@ public class Login extends javax.swing.JFrame {
         }else if(btnText.equals("Send OTP")){
             String InputEmail = txtInputUserIDOrEmail.getText();
             
-            UserFileReader reader = new UserFileReader("student_information.csv");
+            UserFileReader reader = new UserFileReader("account_information.csv");
             user = reader.findUserByEmail(InputEmail);
             
             if (user == null) {
