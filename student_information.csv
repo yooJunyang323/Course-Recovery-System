@@ -1,0 +1,12 @@
+StudentID,FirstName,LastName,Email,Password,Role,isActive,lastLogin,Major,Year
+S000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,2025-12-11 12:25:35
+O000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,--
+A000,Gaku,Kobayakawa,kobayakawa401@gmail.com,000,Admin,true,2025-12-12 10:46:08
+S002,kljaghbriu,bkajbrfoa,S002@university.edu,S002@0987654321,Admin,true,--
+S003,qwrfaw,wqq,S003@university.edu,gaku0515,Student,true,--,Philosophy,Sophomore
+S004,aaa,iii,S004@university.edu,S004@0987654321,Admin,true,--
+O001,kjahg,ojfhg,O001@university.edu,O001@0987654321,Officer,true,--
+O002,aaaaaaaaaa,ffffffffff,O002@university.edu,O002@0987654321,Officer,true,--
+O003,gaku,aaa,O003@university.edu,O003@0987654321,Officer,true,--
+S005,aaaaaaaa,bbbbbbbb,S005@university.edu,S005@0987654321,Student,true,--,Literature,Freshman
+S006,tfgyjik,rfgt6hyuj,S006@university.edu,S006@0987654321,Student,true,--,Enginnering,Freshman
