@@ -1,0 +1,895 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.mycompany.usermanagement;
+
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.DocumentEvent;
+
+/**
+ *
+ * @author gk005
+ */
+public class UpdateUser extends javax.swing.JFrame {
+    
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(UpdateUser.class.getName());
+
+    private CardLayout cardLayout;
+    private FilterManager filterManager;
+    private User selectedUser;
+    private User editingUser;
+    /**
+     * Creates new form UpdateUser
+     */
+    public UpdateUser() {
+        initComponents();
+        
+        txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateFilter();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateFilter();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                updateFilter();
+            }
+            
+            private void updateFilter(){
+                String searchBy = cmbSelectIdOrName.getSelectedItem().toString();
+                filterManager.setsearchBy(searchBy);
+                filterManager.SearchText(txtSearch.getText());
+                updateUserTable(filterManager.applyFilters());
+            }
+        });
+        
+        init();
+    }
+    
+    private void init(){
+        lblMajor.setVisible(false);
+        lblYear.setVisible(false);
+        cmbMajor.setVisible(false);
+        cmbYear.setVisible(false);
+        
+        cardLayout = new CardLayout();
+        pnlMain.setLayout(cardLayout);
+        
+        pnlMain.add(pnlSearch, "SearchPage");
+        pnlMain.add(pnlEdit, "EditPage");
+        
+        cardLayout.show(pnlMain, "SearchPage");
+        loadInitialTable();
+    }
+    
+    public void loadInitialTable(){
+        UserFileReader reader = new UserFileReader("student_information.csv");
+        List<User> allUsers = reader.getAllUsers();
+        
+        filterManager = new FilterManager(allUsers);
+        
+        updateUserTable(filterManager.applyFilters());
+    }
+    
+    public void updateUserTable(List<User> userList){
+        //UserFileReader reader = new UserFileReader("student_information.csv");
+        //List<User> allUsers = reader.getAllUsers();
+        
+        String[] columNames = {"UserID", "Name", "Role", "Major","Year", "Status", "Last Login"};
+        Object[][] tableData = new Object[userList.size()][columNames.length];
+        
+        for(int i = 0; i < userList.size(); i++){
+            User user = userList.get(i);
+            tableData[i][0] = user.getUserID();
+            tableData[i][1] = user.getFirstName() + " " + user.getLastName();
+            tableData[i][2] = user.getRole();
+            
+            if (user instanceof Student) {
+                Student student = (Student) user;
+                tableData[i][3] = student.getMajor();
+                tableData[i][4] = student.getYear();
+            }else{
+                tableData[i][3] = "--";
+                tableData[i][4] = "--";
+            }
+            tableData[i][5] = user.getIsActive() ? "Active" : "Inactive";
+            tableData[i][6] = user.getLastLogin();
+        } 
+        tableUsers.setModel(new DefaultTableModel(tableData, columNames));
+        
+        if(tableUsers.getRowCount() > 0){
+            for(int colum = 0; colum < tableUsers.getColumnCount(); colum++){
+                int width = 50;
+                for (int row = 0; row < tableUsers.getRowCount(); row++){
+                    TableCellRenderer renderer = tableUsers.getCellRenderer(row, colum);
+                    Component comp = tableUsers.prepareRenderer(renderer, row, colum);
+                    width = Math.max(comp.getPreferredSize().width + 10, width);
+                }
+            tableUsers.getColumnModel().getColumn(colum).setPreferredWidth(width);
+            }
+        }
+        
+    }
+    
+    private void clearEditForm(){
+        txtFirstNameEdit.setText("");
+        txtLastNameEdit.setText("");
+        cmbRoleEdit.setSelectedIndex(0);
+        cmbMajorEdit.setSelectedIndex(0);
+        cmbYearEdit.setSelectedIndex(0);
+        ckbActive.setSelected(false);
+        ckbReset.setSelected(false);
+        
+        editingUser = null;
+        selectedUser = null;
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jPanel2 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        pnlMain = new javax.swing.JPanel();
+        pnlEdit = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        lblUserIdEdit = new javax.swing.JLabel();
+        lblFirstNameEdit = new javax.swing.JLabel();
+        lblLastNameEdit = new javax.swing.JLabel();
+        lblEmailEdit = new javax.swing.JLabel();
+        lblPasswordEdit = new javax.swing.JLabel();
+        lblActiveEdit = new javax.swing.JLabel();
+        lblRoleEdit = new javax.swing.JLabel();
+        lblMajorEdit = new javax.swing.JLabel();
+        lblYearEdit = new javax.swing.JLabel();
+        cmbRoleEdit = new javax.swing.JComboBox<>();
+        txtFirstNameEdit = new javax.swing.JTextField();
+        txtLastNameEdit = new javax.swing.JTextField();
+        cmbMajorEdit = new javax.swing.JComboBox<>();
+        cmbYearEdit = new javax.swing.JComboBox<>();
+        ckbActive = new javax.swing.JCheckBox();
+        btnCancel = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        ckbReset = new javax.swing.JCheckBox();
+        lblLastLogin = new javax.swing.JLabel();
+        pnlSearch = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tableUsers = new javax.swing.JTable();
+        cmbSelectIdOrName = new javax.swing.JComboBox<>();
+        txtSearch = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        cmbRole = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        cmbMajor = new javax.swing.JComboBox<>();
+        cmbYear = new javax.swing.JComboBox<>();
+        lblMajor = new javax.swing.JLabel();
+        lblYear = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        btnActive = new javax.swing.JRadioButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jButton1.setText("⇦");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Update User Data");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        pnlEdit.setBackground(new java.awt.Color(255, 255, 255));
+        pnlEdit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel7.setText("Edit");
+
+        lblUserIdEdit.setText("jLabel1");
+
+        lblFirstNameEdit.setText("jLabel4");
+
+        lblLastNameEdit.setText("jLabel5");
+
+        lblEmailEdit.setText("jLabel8");
+
+        lblPasswordEdit.setText("jLabel9");
+
+        lblActiveEdit.setText("jLabel10");
+
+        lblRoleEdit.setText("jLabel11");
+
+        lblMajorEdit.setText("jLabel12");
+
+        lblYearEdit.setText("jLabel13");
+
+        cmbRoleEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student", "Officer", "Admin" }));
+        cmbRoleEdit.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRoleEditItemStateChanged(evt);
+            }
+        });
+
+        cmbMajorEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT", "Literature", "Mathmatics", "Philosophy", "Statistics", "Computer Science", "Enginnering", "Physics", "Biology", "Economics", "History" }));
+
+        cmbYearEdit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SELECT", "Freshman", "Sophomore", "Junior", "Senior" }));
+
+        ckbActive.setText("Active");
+
+        btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        btnEdit.setText("jButton3");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
+
+        ckbReset.setText("Reset");
+
+        lblLastLogin.setText("jLabel1");
+
+        javax.swing.GroupLayout pnlEditLayout = new javax.swing.GroupLayout(pnlEdit);
+        pnlEdit.setLayout(pnlEditLayout);
+        pnlEditLayout.setHorizontalGroup(
+            pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlEditLayout.createSequentialGroup()
+                        .addComponent(btnCancel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEdit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblLastNameEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblFirstNameEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtFirstNameEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+                            .addComponent(txtLastNameEdit)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
+                        .addComponent(lblYearEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbYearEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
+                        .addComponent(lblMajorEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(121, 121, 121)
+                        .addComponent(cmbMajorEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEditLayout.createSequentialGroup()
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblActiveEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(pnlEditLayout.createSequentialGroup()
+                                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(lblPasswordEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblUserIdEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblEmailEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(lblLastLogin))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(lblRoleEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ckbReset)
+                            .addComponent(cmbRoleEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ckbActive))))
+                .addContainerGap())
+        );
+        pnlEditLayout.setVerticalGroup(
+            pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlEditLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblUserIdEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblFirstNameEdit)
+                    .addComponent(txtFirstNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLastNameEdit)
+                    .addComponent(txtLastNameEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmailEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPasswordEdit)
+                    .addComponent(ckbReset))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblActiveEdit)
+                    .addComponent(ckbActive))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLastLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblRoleEdit)
+                    .addComponent(cmbRoleEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMajorEdit)
+                    .addComponent(cmbMajorEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblYearEdit)
+                    .addComponent(cmbYearEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlEditLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel)
+                    .addComponent(btnEdit))
+                .addContainerGap())
+        );
+
+        pnlSearch.setBackground(new java.awt.Color(255, 255, 255));
+        pnlSearch.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED), "Search"));
+
+        tableUsers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "UserID", "Name", "Role", "Major", "Year", "Status", "Last Login"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tableUsers.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tableUsers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableUsersMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tableUsers);
+
+        cmbSelectIdOrName.setFont(new java.awt.Font("Yu Gothic UI", 0, 10)); // NOI18N
+        cmbSelectIdOrName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "UserID", "Name" }));
+
+        cmbRole.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Student", "Officer", "Admin", " " }));
+        cmbRole.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRoleItemStateChanged(evt);
+            }
+        });
+
+        jLabel3.setText("Filter");
+
+        cmbMajor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Literature", "Mathmatics", "Philosophy", "Statistics", "Computer Science", "Enginnering", "Physics", "Biology", "Economics", "History" }));
+        cmbMajor.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbMajorItemStateChanged(evt);
+            }
+        });
+
+        cmbYear.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Freshman", "Sophomore", "Junior", "Senior" }));
+        cmbYear.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbYearItemStateChanged(evt);
+            }
+        });
+
+        lblMajor.setText("Major");
+
+        lblYear.setText("Year");
+
+        jLabel6.setText("Role");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblYear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMajor, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmbYear, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblYear))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        btnActive.setFont(new java.awt.Font("Yu Gothic UI", 0, 10)); // NOI18N
+        btnActive.setSelected(true);
+        btnActive.setText("Only Active User");
+        btnActive.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                btnActiveItemStateChanged(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlSearchLayout = new javax.swing.GroupLayout(pnlSearch);
+        pnlSearch.setLayout(pnlSearchLayout);
+        pnlSearchLayout.setHorizontalGroup(
+            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(pnlSearchLayout.createSequentialGroup()
+                .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(pnlSearchLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(cmbSelectIdOrName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnActive)))
+                .addContainerGap())
+            .addGroup(pnlSearchLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        pnlSearchLayout.setVerticalGroup(
+            pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSearchLayout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addGroup(pnlSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSelectIdOrName, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnActive))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        pnlMain.setLayout(pnlMainLayout);
+        pnlMainLayout.setHorizontalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7))
+        );
+        pnlMainLayout.setVerticalGroup(
+            pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlMainLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(pnlMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(9, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    
+    
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Menu menu = new Menu();
+        menu.setVisible(true);
+        clearEditForm();
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnActiveItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_btnActiveItemStateChanged
+        // TODO add your handling code here:
+        boolean isActiveOnly = btnActive.isSelected();
+        filterManager.setActiveOnly(isActiveOnly);
+        updateUserTable(filterManager.applyFilters());
+    }//GEN-LAST:event_btnActiveItemStateChanged
+
+    private void cmbRoleItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRoleItemStateChanged
+        // TODO add your handling code here:
+        String roleFilter = cmbRole.getSelectedItem().toString();
+        
+        if (roleFilter.equals("Student")) {
+            lblMajor.setVisible(true);
+            cmbMajor.setVisible(true);
+            lblYear.setVisible(true);
+            cmbYear.setVisible(true);
+        }else{
+            lblMajor.setVisible(false);
+            cmbMajor.setVisible(false);
+            lblYear.setVisible(false);
+            cmbYear.setVisible(false);
+        }
+        filterManager.setRoleFilter(roleFilter);
+        
+        updateUserTable(filterManager.applyFilters());
+    }//GEN-LAST:event_cmbRoleItemStateChanged
+
+    private void cmbMajorItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMajorItemStateChanged
+        // TODO add your handling code here:
+        String majorFilter = cmbMajor.getSelectedItem().toString();
+        filterManager.setMajorFilter(majorFilter);
+        updateUserTable(filterManager.applyFilters());
+    }//GEN-LAST:event_cmbMajorItemStateChanged
+
+    private void cmbYearItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbYearItemStateChanged
+        // TODO add your handling code here:
+        String yearFilter = cmbYear.getSelectedItem().toString();
+        filterManager.setYearFilter(yearFilter);
+        updateUserTable(filterManager.applyFilters());
+    }//GEN-LAST:event_cmbYearItemStateChanged
+
+    private void tableUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableUsersMouseClicked
+        // TODO add your handling code here:
+        int selectedRow = tableUsers.getSelectedRow();
+        if(selectedRow >= 0){
+            List<User> filteredList = filterManager.applyFilters();
+            selectedUser = filteredList.get(selectedRow);
+            
+            if (selectedUser instanceof Student) {
+                editingUser = new Student((Student) selectedUser);
+            }else{
+                editingUser = new User(selectedUser);
+            }
+            
+            lblUserIdEdit.setText("UserID : " + selectedUser.getUserID());
+            lblFirstNameEdit.setText("First Name : " + selectedUser.getFirstName());
+            lblLastNameEdit.setText("Last Name : " + selectedUser.getLastName());
+            lblEmailEdit.setText("Email : " + selectedUser.getEmail());
+            lblPasswordEdit.setText("Password : " + selectedUser.getPassword());
+            lblActiveEdit.setText("Status : " +(selectedUser.getIsActive() ? "Active" : "Inactive"));
+            lblLastLogin.setText("Last Login : " + selectedUser.getLastLogin());
+            lblRoleEdit.setText("Role : " + selectedUser.getRole());
+            
+            txtFirstNameEdit.setVisible(false);
+            txtLastNameEdit.setVisible(false);
+            //btnPasswoerReset.setVisible(false);
+            ckbReset.setVisible(false);
+            ckbActive.setVisible(false);
+            cmbRoleEdit.setVisible(false);
+            cmbMajorEdit.setVisible(false);
+            cmbYearEdit.setVisible(false);
+            
+            btnEdit.setText("Edit");
+            
+            if (selectedUser.getRole().equals("Student")) {
+                lblMajorEdit.setText("Major : " + selectedUser.getMajor());
+                lblYearEdit.setText("Year :" + selectedUser.getYear());
+            }else{
+                lblMajorEdit.setVisible(false);
+                lblYearEdit.setVisible(false);
+            }
+            cardLayout.show(pnlMain, "EditPage");
+            
+        }
+    }//GEN-LAST:event_tableUsersMouseClicked
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        clearEditForm();
+        cardLayout.show(pnlMain, "SearchPage");
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        if (btnEdit.getText().equals("Edit")) {
+            
+            txtFirstNameEdit.setVisible(true);
+            txtLastNameEdit.setVisible(true);
+            //btnPasswoerReset.setVisible(true);
+            ckbReset.setVisible(true);
+            
+            ckbActive.setVisible(true);
+            ckbActive.setSelected(selectedUser.getIsActive());
+            cmbRoleEdit.setVisible(true);
+            cmbRoleEdit.setSelectedItem(selectedUser.getRole());
+            
+            if (selectedUser.getRole().equals("Student")) {
+                cmbMajorEdit.setVisible(true);
+                cmbMajorEdit.setSelectedItem(selectedUser.getMajor());
+                cmbYearEdit.setVisible(true);
+                cmbYearEdit.setSelectedItem(selectedUser.getYear());
+            }
+           
+            btnEdit.setText("Save");
+            
+        }else if (btnEdit.getText().equals("Save")) {
+     
+            String currentRole = cmbRoleEdit.getSelectedItem().toString();   
+            
+            if (!selectedUser.getRole().equals("Student") && cmbRoleEdit.getSelectedItem().toString().equals("Student")) {
+                String currentMajor = cmbMajor.getSelectedItem().toString();
+                String currentYear = cmbYearEdit.getSelectedItem().toString();
+                
+                if (currentMajor.equals("SELECT")) {
+                    //red
+                    return;
+                }
+                
+                if (currentYear.equals("SELECT")) {
+                    //red
+                    return;
+                }
+            }
+            
+            
+            if (!txtFirstNameEdit.getText().trim().isEmpty()) {
+                editingUser.setFirstName(txtFirstNameEdit.getText());
+            }
+            
+            if(!txtLastNameEdit.getText().trim().isEmpty()){
+                editingUser.setLastName(txtLastNameEdit.getText());
+            }
+            
+            
+            boolean resetPassword = ckbReset.isSelected();
+            if (resetPassword) {
+                String newPassword = UserDateGenerator.generatePassword(editingUser.getUserID());
+                editingUser.setPassword(newPassword);
+            }
+            
+            boolean originalActive = selectedUser.getIsActive();
+            boolean currentActive = ckbActive.isSelected();   
+            if(originalActive != currentActive) {
+                editingUser.setIsActive(currentActive);
+            }
+            
+              
+            if (!selectedUser.getRole().equals(currentRole)) {
+                switch(currentRole) {
+                    case "Student":
+                        editingUser = new Student(editingUser);
+                        break;
+                    case "Officer":
+                        editingUser = new Officer(editingUser);
+                        break;
+                    case "Admin":
+                        editingUser = new Admin(editingUser);
+                        break;
+                }
+                editingUser.setRole(currentRole);
+            }
+            
+            if (!currentRole.equals("Student") && selectedUser.getRole().equals("Student")) {
+                if (editingUser instanceof Student student) {
+                    student.setMajor("");
+                    student.setYear("");
+                }
+            }
+            
+            if(editingUser instanceof Student student){
+                String currentMajor = cmbMajorEdit.getSelectedItem().toString();
+                String currentYear = cmbYearEdit.getSelectedItem().toString();
+                
+                if(!selectedUser.getMajor().equals(currentMajor)){
+                    student.setMajor(currentMajor);
+                }
+                if (!selectedUser.getYear().equals(currentYear)) {
+                    student.setYear(currentYear);
+                }
+            }
+            
+            StringBuilder userInfo = new StringBuilder();
+            userInfo.append("UserID : ").append(editingUser.getUserID()).append("\n");
+            userInfo.append("First Name : ").append(editingUser.getFirstName()).append("\n");
+            userInfo.append("Last Name : ").append(editingUser.getLastName()).append("\n");
+            userInfo.append("Role: ").append(editingUser.getRole()).append("\n");
+            userInfo.append("Active: ").append(editingUser.getIsActive() ? "Yes" : "No").append("\n");
+            if (ckbReset.isSelected()) {
+                userInfo.append("Password: ").append(editingUser.getPassword()).append("\n");
+            }
+            
+            if (editingUser instanceof Student s) {
+                userInfo.append("Major: ").append(s.getMajor()).append("\n");
+                userInfo.append("Year: ").append(s.getYear()).append("\n");
+            }
+
+            int result = JOptionPane.showConfirmDialog(
+                    this,
+                    userInfo.toString(),
+                    "confirm User Update",
+                    JOptionPane.OK_CANCEL_OPTION
+            );
+            
+            if (result == JOptionPane.OK_OPTION) {
+                UserFileWriter writer = new UserFileWriter("student_information.csv");
+                boolean success = writer.updateUserByID(editingUser.getUserID(), editingUser);
+                if (success) {
+                    JOptionPane.showMessageDialog(this, "User data saved successfully.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    clearEditForm();
+                    init();
+                }else{
+                    JOptionPane.showMessageDialog(this, "Failed to save user data.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }else{
+                return;
+            }
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void cmbRoleEditItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRoleEditItemStateChanged
+        // TODO add your handling code here:
+        String selected = cmbRoleEdit.getSelectedItem().toString();
+        if(selected.equals("Student")){
+            lblMajorEdit.setVisible(true);
+            lblYearEdit.setVisible(true);
+            cmbMajorEdit.setVisible(true);
+            cmbYearEdit.setVisible(true);
+        }else if(selected.equals("Office")){
+            lblMajorEdit.setVisible(false);
+            lblYearEdit.setVisible(false);
+            cmbMajorEdit.setVisible(false);
+            cmbYearEdit.setVisible(false);
+        }else if(selected.equals("Admin")){
+            lblMajorEdit.setVisible(false);
+            lblYearEdit.setVisible(false);
+            cmbMajorEdit.setVisible(false);
+            cmbYearEdit.setVisible(false);
+        }
+    }//GEN-LAST:event_cmbRoleEditItemStateChanged
+
+    
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
+            logger.log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(() -> new UpdateUser().setVisible(true));
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton btnActive;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JCheckBox ckbActive;
+    private javax.swing.JCheckBox ckbReset;
+    private javax.swing.JComboBox<String> cmbMajor;
+    private javax.swing.JComboBox<String> cmbMajorEdit;
+    private javax.swing.JComboBox<String> cmbRole;
+    private javax.swing.JComboBox<String> cmbRoleEdit;
+    private javax.swing.JComboBox<String> cmbSelectIdOrName;
+    private javax.swing.JComboBox<String> cmbYear;
+    private javax.swing.JComboBox<String> cmbYearEdit;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblActiveEdit;
+    private javax.swing.JLabel lblEmailEdit;
+    private javax.swing.JLabel lblFirstNameEdit;
+    private javax.swing.JLabel lblLastLogin;
+    private javax.swing.JLabel lblLastNameEdit;
+    private javax.swing.JLabel lblMajor;
+    private javax.swing.JLabel lblMajorEdit;
+    private javax.swing.JLabel lblPasswordEdit;
+    private javax.swing.JLabel lblRoleEdit;
+    private javax.swing.JLabel lblUserIdEdit;
+    private javax.swing.JLabel lblYear;
+    private javax.swing.JLabel lblYearEdit;
+    private javax.swing.JPanel pnlEdit;
+    private javax.swing.JPanel pnlMain;
+    private javax.swing.JPanel pnlSearch;
+    private javax.swing.JTable tableUsers;
+    private javax.swing.JTextField txtFirstNameEdit;
+    private javax.swing.JTextField txtLastNameEdit;
+    private javax.swing.JTextField txtSearch;
+    // End of variables declaration//GEN-END:variables
+}
