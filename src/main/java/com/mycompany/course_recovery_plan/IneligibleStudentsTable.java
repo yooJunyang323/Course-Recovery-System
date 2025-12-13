@@ -127,7 +127,7 @@ public class IneligibleStudentsTable extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Ineligible Students");
         setBackground(new java.awt.Color(0, 0, 0));
         setResizable(false);
