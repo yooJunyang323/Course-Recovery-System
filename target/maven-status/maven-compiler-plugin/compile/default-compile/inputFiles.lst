@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\AcademicPerformanceReporting.java
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\Course_Information.java
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\Course_Recovery_Plan.java
@@ -9,3 +10,19 @@ C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\Recovery_plan.java
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\ReportItem.java
 C:\Users\User\Documents\NetBeansProjects\Course_Recovery_Plan\src\main\java\com\mycompany\course_recovery_plan\Student_Information.java
+=======
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\AcademicPerformanceReporting.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\Course_Recovery_Plan.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\CourseRecovery.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\createPlan.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\EmailService.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\Failed_student.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\Login.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\com\mycompany\course_recovery_plan\Recovery_plan.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\Course_Information.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\IneligibleStudentsTable.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\ReportItem.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\Student_Information.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\StudentDataManager.java
+C:\Users\aidan\OneDrive\Documents\NetBeansProjects\Course-Recovery-System\src\main\java\StudentDetailsFrame.java
+>>>>>>> origin/aidan
