@@ -340,7 +340,6 @@ public class CourseRecovery extends javax.swing.JFrame {
         jPanel3.setBackground(java.awt.Color.black);
 
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/course_recovery_plan/icons8-user-circle-24.png"))); // NOI18N
         jLabel4.setText("User");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
@@ -351,13 +350,11 @@ public class CourseRecovery extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
+                .addContainerGap(36, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel10))
                 .addGap(26, 26, 26))
         );
         jPanel3Layout.setVerticalGroup(
@@ -698,7 +695,6 @@ public class CourseRecovery extends javax.swing.JFrame {
         jLabel23.setText("jLabel23");
 
         jLabel24.setForeground(java.awt.Color.white);
-        jLabel24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/course_recovery_plan/icons8-cancel-16.png"))); // NOI18N
         jLabel24.setText("Failed component");
 
         javax.swing.GroupLayout pnlFailTemplateLayout = new javax.swing.GroupLayout(pnlFailTemplate);
@@ -728,7 +724,6 @@ public class CourseRecovery extends javax.swing.JFrame {
         jLabel27.setText("jLabel27");
 
         jLabel28.setForeground(java.awt.Color.white);
-        jLabel28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/course_recovery_plan/icons8-cancel-16.png"))); // NOI18N
         jLabel28.setText("Failed component");
 
         javax.swing.GroupLayout pnlFailTemplate1Layout = new javax.swing.GroupLayout(pnlFailTemplate1);
