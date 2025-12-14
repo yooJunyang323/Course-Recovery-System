@@ -14,7 +14,7 @@ public class EmailService {
     private static final String SENDER_EMAIL = "yoojunyang0323@gmail.com"; // YOUR GMAIL
     private static final String APP_PASSWORD = "ydgp ntpg vxkr yidv"; // YOUR APP PASSWORD
 
-    public static void sendRecoveryPlan(String recipientEmail, List<Recovery_plan> planData) {
+    public static void sendRecoveryPlan(String courseName, String studentName,String recipientEmail, List<Recovery_plan> planData) {
         
         if (planData == null || planData.isEmpty()) return;
         
@@ -50,7 +50,7 @@ public class EmailService {
             message.setSubject("Your Course Recovery Plan - "+ courseCode);
 
             // 4. Build the Email Content (HTML Table)
-            String htmlContent = buildHtmlTable(studentID, courseCode, recommendation,planData);
+            String htmlContent = buildHtmlTable(courseName, studentName ,studentID, courseCode, recommendation,planData);
             
             // Set content as HTML so the table renders correctly
             message.setContent(htmlContent, "text/html; charset=utf-8");
@@ -67,7 +67,7 @@ public class EmailService {
     }
 
     // Helper method to format the list into an HTML table
-    public static String buildHtmlTable(String studentID, String code, String rec,List<Recovery_plan> plan) {
+    public static String buildHtmlTable(String courseName, String studentName,String studentID, String code, String rec,List<Recovery_plan> plan) {
         String name = "courseName";
         StringBuilder sb = new StringBuilder();
         String containerStyle = "font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;";
@@ -87,9 +87,9 @@ public class EmailService {
         sb.append("<h1 style='" + headerStyle + "'>Course Recovery Plan</h1>");
 
         // Greeting & Intro
-        sb.append("<p>Dear <b>").append(studentID).append("</b>,</p>");
+        sb.append("<p>Dear <b>").append(studentName).append(studentID).append("</b>,</p>");
         sb.append("<p>We have created a personalized course recovery plan to help you succeed in <b>")
-          .append(name).append(" (").append(code).append(")</b>. ");
+          .append(courseName).append(" (").append(code).append(")</b>. ");
         sb.append("Please review the recommendations and complete the action plan below.</p>");
 
 
@@ -152,25 +152,34 @@ public class EmailService {
         
 
         switch (code) {
-            case "CS201": return "Data Structures";
-            case "C219": return "Programming Concepts";
-            case "C204": return "Database Systems";
-            case "C216": return "Software Engineering";
+            case "CS101": return "Introduction to Computing";
+            case "CS102": return "Data Structures";
+            case "CS103": return "Database Systems";
+            case "CS104": return "Object Oriented Programming";
+            case "CS105": return "Software Engineering";
+
+            // IT Courses
+            case "IT101": return "Introduction to Information Technology";
+            case "IT102": return "Networking";
+            case "IT103": return "Database Management";
+            case "IT104": return "Web Development";
+            case "IT105": return "System Analysis";
             default: return "Course"; 
         }
     }
     
     // Add this NEW method to EmailService.java
-    public static String getHtmlContent(List<Recovery_plan> planData) {
+    public static String getHtmlContent(String studentName, List<Recovery_plan> planData) {
         if (planData == null || planData.isEmpty()) return "<h3>No Plan Found</h3>";
 
         Recovery_plan first = planData.get(0);
         String courseName = getCourseName(first.courseCode); // Make sure getCourseName is accessible too
 
         return buildHtmlTable(
+            courseName,
+            studentName,
             first.studentID, 
-            first.courseCode, 
-            //courseName, 
+            first.courseCode,
             first.recommendation, 
             planData
         );

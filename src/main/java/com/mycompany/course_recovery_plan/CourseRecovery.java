@@ -51,13 +51,10 @@ public class CourseRecovery extends javax.swing.JFrame {
             
             if (failedExam || failedAssignment){
                 String summaryLine = String.format(
-                "ID: %s | Course: %s | Attempt No: %s | Exam Grade: %d | Assignment Grade: %d | Recovery Plan: %s",
+                "ID: %s | Course: %s",
                 student.studentID,
-                student.courseCode,
-                student.attemptNo,
-                student.examGrade,
-                student.assignmentGrade,
-                student.recoveryPlan ? "TRUE" : "FALSE" );
+                student.courseCode);
+                //student.recoveryPlan ? "TRUE" : "FALSE" );
         
                 listModel.addElement(summaryLine);
                 filteredStudents.add(student);
@@ -255,7 +252,6 @@ public class CourseRecovery extends javax.swing.JFrame {
         jPanel13 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
@@ -279,6 +275,7 @@ public class CourseRecovery extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel29 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -551,12 +548,7 @@ public class CourseRecovery extends javax.swing.JFrame {
 
         jLabel14.setForeground(java.awt.Color.white);
         jLabel14.setText("( id )");
-        jPanel13.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, -5, 43, 40));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
-        jLabel15.setForeground(java.awt.Color.white);
-        jLabel15.setText("Bachelor of ");
-        jPanel13.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 28, 134, -1));
+        jPanel13.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 43, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel16.setForeground(java.awt.Color.red);
@@ -747,6 +739,10 @@ public class CourseRecovery extends javax.swing.JFrame {
             }
         });
 
+        jLabel29.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(255, 0, 51));
+        jLabel29.setText("Failed components");
+
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
@@ -755,22 +751,24 @@ public class CourseRecovery extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel12Layout.createSequentialGroup()
-                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(pnlFailTemplate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel12Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel26))
-                            .addComponent(pnlFailTemplate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 31, Short.MAX_VALUE))
-                    .addGroup(jPanel12Layout.createSequentialGroup()
                         .addComponent(jLabel20)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel19)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel21)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)))
+                        .addComponent(jButton3))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(pnlFailTemplate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel29)
+                                .addComponent(pnlFailTemplate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(jPanel12Layout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel26)))
+                        .addGap(0, 29, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -782,18 +780,20 @@ public class CourseRecovery extends javax.swing.JFrame {
                     .addComponent(jLabel19)
                     .addComponent(jLabel21)
                     .addComponent(jButton3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(1, 1, 1)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel22)
                     .addComponent(jLabel26))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel29)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlFailTemplate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlFailTemplate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jPanel13.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 600, 150));
+        jPanel13.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 600, 170));
 
         jPanel17.setBackground(new java.awt.Color(31, 41, 55));
 
@@ -930,6 +930,33 @@ public class CourseRecovery extends javax.swing.JFrame {
                 jLabel14.setText(String.format("( %s )", selectedStudent.studentID));
                 jLabel20.setText(String.format("(%s)",selectedStudent.courseCode));
                 selectedStudentsList = new ArrayList<>();
+                String courseName = "Course Name";
+                String studentName = "Student Name";
+                int credit = 0;
+                
+                Course_Information.readCsvData();
+                List<Course_Information> ci = Course_Information.courseInfo;
+                for (Course_Information courseInfo: ci){
+                    if (selectedStudent.courseCode.equalsIgnoreCase(courseInfo.courseCode)){
+                        courseName = courseInfo.tittle;
+                        credit = courseInfo.credit;
+                        break;
+                    }
+                }
+                
+                Student_Information.readCsvData();
+                List<Student_Information> si = Student_Information.info;
+                for (Student_Information studentInfo: si){
+                    if (selectedStudent.studentID.equalsIgnoreCase(studentInfo.id)){
+                        studentName = studentInfo.name;
+                        break;
+                    }
+                }
+                
+                jLabel18.setText(studentName);
+                jLabel21.setText(courseName);
+                jLabel26.setText(String.valueOf(credit));
+                
 
                 System.out.println("Selected Student ID: " + selectedStudent.studentID);
                 System.out.println("Selected Student courseCode: " + selectedStudent.courseCode);
@@ -1087,10 +1114,13 @@ public class CourseRecovery extends javax.swing.JFrame {
         }
 
         String studentEmail = javax.swing.JOptionPane.showInputDialog(this, "Enter Student Email:");
-
+        
+        String studentName = jLabel18.getText();
+        String courseName = jLabel21.getText();
+        
         if (studentEmail != null && !studentEmail.trim().isEmpty()) {
 
-            EmailService.sendRecoveryPlan(studentEmail, specificPlan);
+            EmailService.sendRecoveryPlan(courseName, studentName,studentEmail, specificPlan);
         }
     }//GEN-LAST:event_jButton3MouseClicked
 
@@ -1151,7 +1181,6 @@ public class CourseRecovery extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -1166,6 +1195,7 @@ public class CourseRecovery extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;

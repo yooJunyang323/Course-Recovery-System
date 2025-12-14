@@ -5,10 +5,15 @@
 package com.mycompany.course_recovery_plan;
 
 import com.mycompany.usermanagement.Login;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 
 public class Student extends javax.swing.JFrame {
     private String currentStudentId;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Student.class.getName());
+    public String studentName;
+    public String courseName;
 
     /**
      * Creates new form Student
@@ -21,8 +26,71 @@ public class Student extends javax.swing.JFrame {
         initComponents(); 
         this.currentStudentId = id; 
         System.out.print("studentID: "+id);
+        String studentName;
+        List<String> addedCourses = new ArrayList<>();
+        
+        Recovery_plan.readCsvData();
+        List<Recovery_plan> planData = Recovery_plan.plan;
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        for (Recovery_plan p : planData) {
+            if (id.trim().equalsIgnoreCase(p.studentID.trim())) {
+                if (!addedCourses.contains(p.courseCode)) {
+                    addedCourses.add(p.courseCode);
+                    model.addElement(p.courseCode);
+                }
+            }
+        }
+        
+        jComboBox1.setModel(model);
+        
+        if (model.getSize() > 0) {
+            String selectedCode = jComboBox1.getSelectedItem().toString();
+
+            // 4. Load Course Name
+            Course_Information.readCsvData();
+            List<Course_Information> ci = Course_Information.courseInfo;
+            for (Course_Information courseInfo : ci) {
+                if (selectedCode.equalsIgnoreCase(courseInfo.courseCode)) {
+                    this.courseName = courseInfo.tittle;
+                    break;
+                }
+            } 
+        } else {
+            this.courseName = "No Course Found";
+        }
+        
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                // This code runs every time the user picks a new item
+                String selectedCode = jComboBox1.getSelectedItem().toString();
+                updateCourseName(selectedCode);
+            }
+        });
+        
+        Student_Information.readCsvData();
+        List<Student_Information> si = Student_Information.info;
+        for (Student_Information studentInfo: si){
+            if (id.equalsIgnoreCase(studentInfo.id)){
+                studentName = studentInfo.name;
+                this.studentName= studentName;
+                break;
+            }
+        }
 
     }
+    
+    private void updateCourseName(String code) {
+        Course_Information.readCsvData();
+        for (Course_Information ci : Course_Information.courseInfo) {
+            if (ci.courseCode.equalsIgnoreCase(code)) {
+                this.courseName = ci.tittle; // Update the class variable
+                System.out.println("Course Name updated to: " + this.courseName); // Debug print
+                return;
+            }
+        }
+        this.courseName = "Unknown Course";
+    }
+       
     
     
 
@@ -44,6 +112,7 @@ public class Student extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
@@ -128,19 +197,25 @@ public class Student extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(108, 108, 108)
-                .addComponent(jButton1)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(116, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(101, 101, 101)
+                .addGap(31, 31, 31)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(48, 48, 48)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(136, Short.MAX_VALUE))
         );
@@ -204,47 +279,55 @@ public class Student extends javax.swing.JFrame {
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         if (currentStudentId.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a Student ID first!");
-        return;
-    }
-
-
-    java.util.List<Recovery_plan> studentPlan = new java.util.ArrayList<>();
-    Recovery_plan.readCsvData();
-    for (Recovery_plan p : Recovery_plan.plan) {
-
-        if (p.studentID.equalsIgnoreCase(currentStudentId)) { 
-            studentPlan.add(p);
-            System.out.println("Match student id");
+            javax.swing.JOptionPane.showMessageDialog(this, "Please enter a Student ID first!");
+            return;
         }
-    }
+        Object selectedItem = jComboBox1.getSelectedItem();
+        if (selectedItem == null) {
+            // This popup appears if the student has no courses in the list
+            javax.swing.JOptionPane.showMessageDialog(this, "You don't have a recovery plan.");
+            return; 
+        }
+        
+        String selectedCourse = selectedItem.toString();
     
+        java.util.List<Recovery_plan> studentPlan = new java.util.ArrayList<>();
+        Recovery_plan.readCsvData();
+        for (Recovery_plan p : Recovery_plan.plan) {
+
+            if (p.studentID.equalsIgnoreCase(currentStudentId)&& 
+                p.courseCode.equalsIgnoreCase(selectedCourse)) { 
+                studentPlan.add(p);
+                System.out.println("Match student id");
+            }
+        }
 
 
-    if (studentPlan.isEmpty()) {
-        javax.swing.JOptionPane.showMessageDialog(this, "No recovery plan found for Student: " + currentStudentId);
-        return;
-    }
+
+        if (studentPlan.isEmpty()) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No recovery plan found for Student: " + currentStudentId);
+            return;
+        }
 
 
-    String htmlContent = EmailService.getHtmlContent(studentPlan);
+        String htmlContent = EmailService.getHtmlContent(studentName,studentPlan);
 
-    javax.swing.JDialog previewDialog = new javax.swing.JDialog(this, "Email Preview", true);
-    previewDialog.setSize(650, 600); 
-    previewDialog.setLocationRelativeTo(this);
+        javax.swing.JDialog previewDialog = new javax.swing.JDialog(this, "Email Preview", true);
+        previewDialog.setSize(650, 600); 
+        previewDialog.setLocationRelativeTo(this);
 
-    javax.swing.JEditorPane editorPane = new javax.swing.JEditorPane();
-    editorPane.setContentType("text/html");
-    editorPane.setText(htmlContent);
-    editorPane.setEditable(false);
-    editorPane.setCaretPosition(0); 
+        javax.swing.JEditorPane editorPane = new javax.swing.JEditorPane();
+        editorPane.setContentType("text/html");
+        editorPane.setText(htmlContent);
+        editorPane.setEditable(false);
+        editorPane.setCaretPosition(0); 
 
-   
-    javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(editorPane);
-    previewDialog.add(scrollPane);
 
-    
-    previewDialog.setVisible(true);
+        javax.swing.JScrollPane scrollPane = new javax.swing.JScrollPane(editorPane);
+        previewDialog.add(scrollPane);
+
+
+        previewDialog.setVisible(true);
     }//GEN-LAST:event_jButton1MouseClicked
 
     /**
@@ -274,6 +357,7 @@ public class Student extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

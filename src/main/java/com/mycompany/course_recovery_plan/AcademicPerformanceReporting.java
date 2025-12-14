@@ -134,43 +134,7 @@ public class AcademicPerformanceReporting extends javax.swing.JFrame {
         // header.setBackgroundColor(java.awt.Color.LIGHT_GRAY); 
         table.addCell(header);
     }
-    /*
-    public static void generatePdfReport(List<ReportItem> reportList) {
-        Document document = new Document();
-
-        try {
-            // Output file
-            PdfWriter.getInstance(document, new FileOutputStream("Final_Student_Report.pdf"));
-            document.open();
-
-            document.add(new Paragraph("Detailed Student Report"));
-            document.add(new Paragraph("--------------------------------------------------"));
-
-            if (reportList.isEmpty()) {
-                document.add(new Paragraph("No records found for this student."));
-            } else {
-                // Loop through the NEW ReportItem list
-                for (ReportItem item : reportList) {
-                    // We access fields from the ReportItem class now
-                    String line = "Student: " + item.name + " (" + item.id + ")\n" +
-                                  "Major: " + item.major + "\n" +
-                                  "Course: " + item.courseName + " (" + item.courseCode + ")\n" +
-                                  "Semester: " + item.semester + " | Credits: " + item.credit + 
-                                  " | Attempt: " + item.attemptNum + "\n" +
-                                  "--------------------------------------------------";
-
-                    document.add(new Paragraph(line));
-                }
-            }
-
-            System.out.println("PDF Created Successfully!");
-
-        } catch (DocumentException | IOException e) {
-            System.err.println("Error generating PDF: " + e.getMessage());
-        } finally {
-            document.close();
-        }
-} */
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -315,23 +279,7 @@ public class AcademicPerformanceReporting extends javax.swing.JFrame {
         
 
         
-        /*
-        for (Failed_student student1: student){
-            if (id.equalsIgnoreCase(student1.studentID.trim())){
-                String courseCode = student1.courseCode;
-                int attemptNum = student1.attemptNo;
-                for (Course_Information sc: c){
-                    if(courseCode.equalsIgnoreCase(sc.courseCode.trim())){
-                        String courseName = sc.tittle;
-                        int semester = sc.semester;
-                        int credit = sc.credit;
-                        
-                        //stud_Course.add
-                    }
-                }
-                
-            }
-        } */
+        
         
         for (Failed_student fs : student) {
         // Check if this failed record belongs to the selected student
