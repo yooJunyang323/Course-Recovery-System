@@ -44,7 +44,6 @@ public class Recovery_plan {
         System.out.println("Total loaded: " + plan.size());
     }
     
-    //read the students who is indise the course_recovery.csv
     public static void readCsvData(){
         plan.clear();
         String line;
@@ -101,11 +100,9 @@ public class Recovery_plan {
     
     public static void saveCsvData() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(CSV_FILE_PATH, false))) {
-            // 1. Write the Header (Important!)
             writer.write("Student ID,Course Code,Week,Task,Status,Recommendation");
             writer.newLine();
 
-            // 2. Loop through the updated list and write every row
             for (Recovery_plan rp : plan) {
                 String line = String.format("%s,%s,%d,%s,%b,%s",
                     rp.studentID,
@@ -113,7 +110,7 @@ public class Recovery_plan {
                     rp.weekNo,
                     rp.task,
                     rp.status,
-                    rp.recommendation // This will now contain the updated text
+                    rp.recommendation 
                 );
                 writer.write(line);
                 writer.newLine();

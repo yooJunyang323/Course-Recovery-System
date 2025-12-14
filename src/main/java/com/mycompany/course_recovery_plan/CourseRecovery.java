@@ -4,6 +4,10 @@
  */
 package com.mycompany.course_recovery_plan;
 
+//Inheritance
+//Encapsulation
+//Polymorphism
+//Abstraction
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
@@ -28,12 +32,13 @@ public class CourseRecovery extends javax.swing.JFrame {
     public CourseRecovery() {
         initComponents();
         jPanel11.setVisible(false);
+        setupTableDeleteListener();
         LoadStudents();
         
     }
     
     public void refreshStudentList() {
-        LoadStudents(); // your existing method to reload table or JList
+        LoadStudents(); 
     }
 
     public final void LoadStudents(){
@@ -54,7 +59,6 @@ public class CourseRecovery extends javax.swing.JFrame {
                 "ID: %s | Course: %s",
                 student.studentID,
                 student.courseCode);
-                //student.recoveryPlan ? "TRUE" : "FALSE" );
         
                 listModel.addElement(summaryLine);
                 filteredStudents.add(student);
@@ -64,6 +68,47 @@ public class CourseRecovery extends javax.swing.JFrame {
 
         jList1.setModel(listModel);
         
+    }
+    
+    private void setupTableDeleteListener() {
+        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE || 
+                    evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE) {
+
+                    int selectedRow = jTable1.getSelectedRow();
+
+                    if (selectedRow >= 0 && !jTable1.isEditing()) {
+
+                        int confirm = javax.swing.JOptionPane.showConfirmDialog(
+                            null, 
+                            "Are you sure you want to delete this task?", 
+                            "Delete Confirmation", 
+                            javax.swing.JOptionPane.YES_NO_OPTION
+                        );
+
+                        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
+
+                            DefaultTableModel currentModel = (DefaultTableModel) jTable1.getModel();
+
+
+                            if (specificPlan != null && selectedRow < specificPlan.size()) {
+                                Recovery_plan planToRemove = specificPlan.get(selectedRow);
+                                specificPlan.remove(selectedRow);
+                                Recovery_plan.plan.remove(planToRemove);
+
+                                Recovery_plan.saveCsvData();
+
+                                currentModel.removeRow(selectedRow);
+                                System.out.println("Row deleted successfully.");
+                            }
+                        }
+                    }
+                }
+            }
+        });
     }
     
     public final void Load_plan(String studentID,String courseCode){
@@ -158,36 +203,7 @@ public class CourseRecovery extends javax.swing.JFrame {
             }
         });
         
-        jTable1.addKeyListener(new java.awt.event.KeyAdapter() {
-            @Override
-            public void keyPressed(java.awt.event.KeyEvent evt) {               
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_DELETE || 
-                    evt.getKeyCode() == java.awt.event.KeyEvent.VK_BACK_SPACE) {
-
-                    int selectedRow = jTable1.getSelectedRow();
-
-
-                    if (selectedRow >= 0) {
-
-                        int confirm = javax.swing.JOptionPane.showConfirmDialog(
-                            null, 
-                            "Are you sure you want to delete this task?", 
-                            "Delete Confirmation", 
-                            javax.swing.JOptionPane.YES_NO_OPTION
-                        );
-
-                        if (confirm == javax.swing.JOptionPane.YES_OPTION) {
-                            Recovery_plan planToRemove = specificPlan.get(selectedRow);
-                            specificPlan.remove(selectedRow);
-                            Recovery_plan.plan.remove(planToRemove);
-                            Recovery_plan.saveCsvData();
-                            model.removeRow(selectedRow);
-                            System.out.println("Row deleted and CSV updated.");
-                        }
-                    }
-                }
-            }
-        });
+        
         
 
         if (!specificPlan.isEmpty()){
@@ -920,10 +936,7 @@ public class CourseRecovery extends javax.swing.JFrame {
     private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
         jTextField1.setText("");
         if (!evt.getValueIsAdjusting() && jList1.getSelectedIndex() != -1) {
-            
             int selectedIndex = jList1.getSelectedIndex();
-            
-
             if (selectedIndex >= 0 && selectedIndex < filteredStudents.size()) {
 
                 Failed_student selectedStudent = filteredStudents.get(selectedIndex);

@@ -67,7 +67,7 @@ public class Failed_student {
                 
                 if (values.length >= 8) {
                     try {
-                    // Create object using the corrected indices and constructor
+
                     Failed_student fs = new Failed_student(
                         values[0].trim(), // StudentID
                         values[1].trim(), // CourseCode

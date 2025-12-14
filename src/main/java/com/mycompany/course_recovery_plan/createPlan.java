@@ -111,7 +111,7 @@ public class createPlan extends javax.swing.JFrame {
     
     
     public static void saveToCSV(String id, String courseCode, int weekNumber, String taskLine, boolean selected, String recommendation) {
-        String filePath = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\course_recovery.csv\\";
+        String filePath = "C:\\Users\\User\\Documents\\NetBeansProjects\\Course_Recovery_Plan\\course_recovery.csv\\";
         boolean status = selected;
         
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath,true))) {

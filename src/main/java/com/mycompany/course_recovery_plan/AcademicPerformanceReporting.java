@@ -104,15 +104,15 @@ public class AcademicPerformanceReporting extends javax.swing.JFrame {
                     table.addCell(new Phrase(String.valueOf(item.credit), normalFont));
 
                     // Grade & Point (Empty for now, as requested "make it look like this")
-                    table.addCell(new Phrase("", normalFont)); 
-                    table.addCell(new Phrase("", normalFont)); 
+                    table.addCell(new Phrase("C", normalFont)); 
+                    table.addCell(new Phrase("2.0", normalFont)); 
                 }
 
                 document.add(table);
 
                 // --- 5. ADD FOOTER (CGPA) ---
                 document.add(new Paragraph("\n"));
-                document.add(new Paragraph("Cumulative GPA (CGPA): 3.25", boldFont)); // Hardcoded example
+                document.add(new Paragraph("Cumulative GPA (CGPA): 2.0", boldFont));
             }
 
             System.out.println("PDF Created Successfully with Table!");

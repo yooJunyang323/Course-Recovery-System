@@ -46,7 +46,6 @@ public class Student extends javax.swing.JFrame {
         if (model.getSize() > 0) {
             String selectedCode = jComboBox1.getSelectedItem().toString();
 
-            // 4. Load Course Name
             Course_Information.readCsvData();
             List<Course_Information> ci = Course_Information.courseInfo;
             for (Course_Information courseInfo : ci) {
@@ -61,7 +60,6 @@ public class Student extends javax.swing.JFrame {
         
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                // This code runs every time the user picks a new item
                 String selectedCode = jComboBox1.getSelectedItem().toString();
                 updateCourseName(selectedCode);
             }
@@ -83,8 +81,8 @@ public class Student extends javax.swing.JFrame {
         Course_Information.readCsvData();
         for (Course_Information ci : Course_Information.courseInfo) {
             if (ci.courseCode.equalsIgnoreCase(code)) {
-                this.courseName = ci.tittle; // Update the class variable
-                System.out.println("Course Name updated to: " + this.courseName); // Debug print
+                this.courseName = ci.tittle; 
+                System.out.println("Course Name updated to: " + this.courseName);
                 return;
             }
         }
@@ -284,7 +282,6 @@ public class Student extends javax.swing.JFrame {
         }
         Object selectedItem = jComboBox1.getSelectedItem();
         if (selectedItem == null) {
-            // This popup appears if the student has no courses in the list
             javax.swing.JOptionPane.showMessageDialog(this, "You don't have a recovery plan.");
             return; 
         }
