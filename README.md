@@ -1,7 +1,7 @@
-Part 2: Course Recovery Plan
+## How to Run
 
-File path:  src/main/java/com/mycompany/course_recovery_plan
-
-Part 4: Academic performance report
-
-File path: src/main/java
+1. Open the project using Apache NetBeans.
+2. Expand the `usermanagement` package.
+3. Right-click the Login form (`LoginForm.java`) and select **Run File**.
+4. Log in to the system.
+5. The remaining forms will be shown based on the system flow.
