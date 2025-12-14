@@ -5,9 +5,9 @@ import javax.swing.table.DefaultTableModel;
 
 public class IneligibleStudentsTable extends javax.swing.JFrame {
 
-    String studentFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_information.csv";
-    String studentAssessmentFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_assessment_information.csv";
-    String courseFile = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\course_assessment_information.csv";
+    String studentFile = "C:\\Users\\User\\Documents\\NetBeansProjects\\Course_Recovery_Plan\\student_information.csv";
+    String studentAssessmentFile = "C:\\Users\\User\\Documents\\NetBeansProjects\\Course_Recovery_Plan\\student_assessment_information.csv";
+    String courseFile = "C:\\Users\\User\\Documents\\NetBeansProjects\\Course_Recovery_Plan\\course_assessment_information.csv";
     List<Object[]> fullStudentList = new ArrayList<>();
     StudentDataManager dataManager;
     

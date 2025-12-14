@@ -4,9 +4,11 @@
 
 package com.mycompany.course_recovery_plan;
 
+import com.mycompany.usermanagement.Login;
 public class Course_Recovery_Plan {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Login l = new Login();
+        l.setVisible(true);
     }
 }

@@ -168,7 +168,7 @@ public class EmailService {
         }
     }
     
-    // Add this NEW method to EmailService.java
+
     public static String getHtmlContent(String studentName, List<Recovery_plan> planData) {
         if (planData == null || planData.isEmpty()) return "<h3>No Plan Found</h3>";
 

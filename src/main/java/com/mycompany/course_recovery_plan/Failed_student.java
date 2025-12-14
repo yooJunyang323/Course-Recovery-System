@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Failed_student {
-    private static final String CSV_FILE_PATH = "D:\\APU\\Sem1Year2\\course_recovery_plan(JAVA)\\student_assessment_information.csv\\"; 
+    private static final String CSV_FILE_PATH = "C:\\Users\\User\\Documents\\NetBeansProjects\\Course_Recovery_Plan\\student_assessment_information.csv"; 
     private static final String DELIMITER = ",";
     
     public String studentID;
