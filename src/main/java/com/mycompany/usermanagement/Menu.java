@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import com.mycompany.course_recovery_plan.CourseRecovery;
 import com.mycompany.course_recovery_plan.IneligibleStudentsTable;
 import com.mycompany.course_recovery_plan.AcademicPerformanceReporting;
+import com.mycompany.course_recovery_plan.Student;
 
 public class Menu extends javax.swing.JFrame {
     
@@ -28,7 +29,10 @@ public class Menu extends javax.swing.JFrame {
         btnUserUpdate.setVisible(false);
         //add all components
         if (userRole.equals("Student")) {
-            
+            String studentId = loggedUser.getUserID();
+            Student studentForm = new Student(studentId);
+            studentForm.setVisible(true);
+    this.dispose();
         }else if (userRole.equals("Admin")) {
             this.setVisible(true);
             btnCreateUser.setVisible(true);

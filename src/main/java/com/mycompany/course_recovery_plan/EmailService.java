@@ -67,7 +67,7 @@ public class EmailService {
     }
 
     // Helper method to format the list into an HTML table
-    private static String buildHtmlTable(String studentID, String code, String rec,List<Recovery_plan> plan) {
+    public static String buildHtmlTable(String studentID, String code, String rec,List<Recovery_plan> plan) {
         String name = "courseName";
         StringBuilder sb = new StringBuilder();
         String containerStyle = "font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #ddd; padding: 20px; border-radius: 8px;";
@@ -158,5 +158,21 @@ public class EmailService {
             case "C216": return "Software Engineering";
             default: return "Course"; 
         }
+    }
+    
+    // Add this NEW method to EmailService.java
+    public static String getHtmlContent(List<Recovery_plan> planData) {
+        if (planData == null || planData.isEmpty()) return "<h3>No Plan Found</h3>";
+
+        Recovery_plan first = planData.get(0);
+        String courseName = getCourseName(first.courseCode); // Make sure getCourseName is accessible too
+
+        return buildHtmlTable(
+            first.studentID, 
+            first.courseCode, 
+            //courseName, 
+            first.recommendation, 
+            planData
+        );
     }
 }

@@ -1,13 +1,13 @@
 StudentID,FirstName,LastName,Email,Password,Role,isActive,lastLogin,Major,Year
-S000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,2025-12-14 07:24:51
-O000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,true,--
-A000,Gaku,Kobayakawa,kobayakawa401@gmail.com,000,Admin,true,2025-12-14 07:21:13
-S002,kljaghbriu,bkajbrfoa,S002@university.edu,S002@0987654321,Admin,true,--
-S003,qwrfaw,wqq,S003@university.edu,gaku0515,Student,true,--,Philosophy,Sophomore
-S004,aaa,iii,S004@university.edu,S004@0987654321,Admin,true,--
-O001,kjahg,ojfhg,O001@university.edu,O001@0987654321,Officer,true,--
-O002,aaaaaaaaaa,ffffffffff,O002@university.edu,O002@0987654321,Officer,true,--
-O003,gaku,aaa,O003@university.edu,O003@0987654321,Officer,true,--
-S005,aaaaaaaa,bbbbbbbb,S005@university.edu,S005@0987654321,Student,true,--,Literature,Freshman
-S006,tfgyjik,rfgt6hyuj,S006@university.edu,S006@0987654321,Student,true,--,Enginnering,Freshman
-O004,hello,Jun Yang,O004@university.edu,O004@0987654321,Officer,true,--
+S000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,TRUE,14/12/2025 10:28,,
+O000,Gaku,Kobayakawa,gaku@gmail.com,gaku0515,Officer,TRUE,--,,
+A000,Gaku,Kobayakawa,kobayakawa401@gmail.com,000,Admin,TRUE,14/12/2025 8:29,,
+S002,kljaghbriu,bkajbrfoa,S002@university.edu,S002@0987654321,Admin,TRUE,--,,
+S003,Ivan,Wilson,ivan.wilson@university.edu,gaku0515,Student,TRUE,14/12/2025 10:30,Philosophy,Sophomore
+S004,aaa,iii,S004@university.edu,S004@0987654321,Admin,TRUE,--,,
+O001,kjahg,ojfhg,O001@university.edu,O001@0987654321,Officer,TRUE,--,,
+O002,aaaaaaaaaa,ffffffffff,O002@university.edu,O002@0987654321,Officer,TRUE,--,,
+O003,gaku,aaa,O003@university.edu,O003@0987654321,Officer,TRUE,--,,
+S005,Bob,Smith,bob.smith@university.edu,S005@0987654321,Student,TRUE,--,Literature,Freshman
+S006,Quinn,Chen,quinn.chen@university.edu,S006@0987654321,Student,TRUE,--,Enginnering,Freshman
+O004,hello,Jun Yang,O004@university.edu,O004@0987654321,Officer,TRUE,--,,
